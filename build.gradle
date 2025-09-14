@@ -24,6 +24,8 @@ repositories {
 	mavenCentral()
 }
 
+def SPRINGWOLF_VERSION = '1.17.0'
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
@@ -36,6 +38,9 @@ dependencies {
 
     // swagger @Schema annotation
     implementation 'io.swagger.core.v3:swagger-annotations-jakarta:2.2.36'
+
+    // Springwolf dependencies
+    implementation "io.github.springwolf:springwolf-kafka:${SPRINGWOLF_VERSION}"
 }
 
 tasks.named('test') {
