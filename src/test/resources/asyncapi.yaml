@@ -1,0 +1,158 @@
+asyncapi: 3.0.0
+info:
+  title: springwolf-demo
+  version: 1.0.0
+  x-generator: springwolf
+defaultContentType: application/json
+servers:
+  kafka-server:
+    host: localhost:9092
+    protocol: kafka
+channels:
+  another-topic:
+    address: another-topic
+    messages:
+      de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto:
+        $ref: "#/components/messages/de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto"
+    bindings:
+      kafka:
+        bindingVersion: 0.5.0
+  example-topic:
+    address: example-topic
+    messages:
+      de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto:
+        $ref: "#/components/messages/de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto"
+    bindings:
+      kafka:
+        bindingVersion: 0.5.0
+components:
+  schemas:
+    SpringKafkaDefaultHeaders-AnotherPayloadDto:
+      title: SpringKafkaDefaultHeaders-AnotherPayloadDto
+      type: object
+      properties:
+        __TypeId__:
+          type: string
+          description: Spring Type Id Header
+          enum:
+            - de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto
+          examples:
+            - de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto
+      examples:
+        - __TypeId__: de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto
+    SpringKafkaDefaultHeaders-ExamplePayloadDto:
+      title: SpringKafkaDefaultHeaders-ExamplePayloadDto
+      type: object
+      properties:
+        __TypeId__:
+          type: string
+          description: Spring Type Id Header
+          enum:
+            - de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto
+          examples:
+            - de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto
+      examples:
+        - __TypeId__: de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto
+    de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto:
+      title: AnotherPayloadDto
+      type: object
+      properties:
+        example:
+          $ref: "#/components/schemas/de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto"
+        foo:
+          type: string
+          description: Foo field
+          maxLength: 100
+          examples:
+            - bar
+      description: Another payload model
+      examples:
+        - example:
+            someEnum: FOO2
+            someLong: 5
+            someString: some string value
+          foo: bar
+      required:
+        - example
+    de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto:
+      title: ExamplePayloadDto
+      type: object
+      properties:
+        someEnum:
+          type: string
+          description: Some enum field
+          enum:
+            - FOO1
+            - FOO2
+            - FOO3
+          examples:
+            - FOO2
+        someLong:
+          type: integer
+          description: Some long field
+          format: int64
+          minimum: 0
+          examples:
+            - 5
+        someString:
+          type: string
+          examples:
+            - some string value
+      description: |
+        Example payload model demonstrating markdown text styling:
+        **bold**, *cursive* and <u>underlined</u>
+      examples:
+        - someEnum: FOO2
+          someLong: 5
+          someString: some string value
+      required:
+        - someEnum
+        - someString
+  messages:
+    de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto:
+      headers:
+        $ref: "#/components/schemas/SpringKafkaDefaultHeaders-AnotherPayloadDto"
+      payload:
+        schemaFormat: application/vnd.aai.asyncapi+json;version=3.0.0
+        schema:
+          $ref: "#/components/schemas/de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto"
+      name: de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto
+      title: AnotherPayloadDto
+      bindings:
+        kafka:
+          bindingVersion: 0.5.0
+    de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto:
+      headers:
+        $ref: "#/components/schemas/SpringKafkaDefaultHeaders-ExamplePayloadDto"
+      payload:
+        schemaFormat: application/vnd.aai.asyncapi+json;version=3.0.0
+        schema:
+          $ref: "#/components/schemas/de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto"
+      name: de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto
+      title: ExamplePayloadDto
+      bindings:
+        kafka:
+          bindingVersion: 0.5.0
+operations:
+  another-topic_receive_receiveAnotherPayload:
+    action: receive
+    channel:
+      $ref: "#/channels/another-topic"
+    bindings:
+      kafka:
+        groupId:
+          type: string
+          enum:
+            - example-group-id
+        bindingVersion: 0.5.0
+    messages:
+      - $ref: "#/channels/another-topic/messages/de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto"
+  example-topic_receive_receiveExamplePayload:
+    action: receive
+    channel:
+      $ref: "#/channels/example-topic"
+    bindings:
+      kafka:
+        bindingVersion: 0.5.0
+    messages:
+      - $ref: "#/channels/example-topic/messages/de.timonback.asyncapi.springwolf_demo.dto.ExamplePayloadDto"

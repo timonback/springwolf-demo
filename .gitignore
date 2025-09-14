@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+asyncapi.actual.yaml
+asyncapi.standalone.yaml
