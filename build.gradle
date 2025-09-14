@@ -41,6 +41,9 @@ dependencies {
 
     // Springwolf dependencies
     implementation "io.github.springwolf:springwolf-kafka:${SPRINGWOLF_VERSION}"
+
+    // Optional springwolf-ui -> http://localhost:8080/springwolf/asyncapi-ui.html
+    runtimeOnly "io.github.springwolf:springwolf-ui:${SPRINGWOLF_VERSION}"
 }
 
 tasks.named('test') {
