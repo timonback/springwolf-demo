@@ -27,6 +27,13 @@ channels:
         bindingVersion: 0.5.0
 components:
   schemas:
+    HeadersNotDocumented:
+      title: HeadersNotDocumented
+      type: object
+      properties: {}
+      description: "There can be headers, but they are not explicitly documented."
+      examples:
+        - {}
     SpringKafkaDefaultHeaders-AnotherPayloadDto:
       title: SpringKafkaDefaultHeaders-AnotherPayloadDto
       type: object
@@ -111,7 +118,7 @@ components:
   messages:
     de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto:
       headers:
-        $ref: "#/components/schemas/SpringKafkaDefaultHeaders-AnotherPayloadDto"
+        $ref: "#/components/schemas/HeadersNotDocumented"
       payload:
         schemaFormat: application/vnd.aai.asyncapi+json;version=3.0.0
         schema:
@@ -144,6 +151,17 @@ operations:
           type: string
           enum:
             - example-group-id
+        bindingVersion: 0.5.0
+    messages:
+      - $ref: "#/channels/another-topic/messages/de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto"
+  another-topic_send_sendMessage:
+    action: send
+    channel:
+      $ref: "#/channels/another-topic"
+    title: another-topic_send
+    description: Sends another payload message
+    bindings:
+      kafka:
         bindingVersion: 0.5.0
     messages:
       - $ref: "#/channels/another-topic/messages/de.timonback.asyncapi.springwolf_demo.dto.AnotherPayloadDto"
